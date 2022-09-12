@@ -1,0 +1,34 @@
+﻿<Properties StartupConfiguration="{8E368927-2A47-4EB3-9CCB-0AED612DB1FC}|Default">
+  <MonoDevelop.Ide.ItemProperties.Controller FirstBuild="True" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workbench ActiveDocument="RaceSim/Program.cs">
+    <Files>
+      <File FileName="RaceSim/Program.cs" Line="2" Column="36" />
+      <File FileName="Model/Class1.cs" Line="1" Column="1" />
+      <File FileName="Controller/Class1.cs" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="RaceSim" expanded="True">
+            <Node name="Controller" expanded="True" />
+            <Node name="Model" expanded="True" />
+            <Node name="RaceSim" expanded="True">
+              <Node name="Program.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.Model FirstBuild="True" />
+  <MonoDevelop.Ide.ItemProperties.RaceSim PreferredExecutionTarget="MonoDevelop.Default" FirstBuild="True" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+</Properties>
