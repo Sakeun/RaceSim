@@ -1,0 +1,12 @@
+/Users/sietsezee/Projects/RaceSim/RaceSim/Model/bin/Debug/net6.0/Model.deps.json
+/Users/sietsezee/Projects/RaceSim/RaceSim/Model/bin/Debug/net6.0/Model.dll
+/Users/sietsezee/Projects/RaceSim/RaceSim/Model/bin/Debug/net6.0/Model.pdb
+/Users/sietsezee/Projects/RaceSim/RaceSim/Model/obj/Debug/net6.0/Model.csproj.AssemblyReference.cache
+/Users/sietsezee/Projects/RaceSim/RaceSim/Model/obj/Debug/net6.0/Model.GeneratedMSBuildEditorConfig.editorconfig
+/Users/sietsezee/Projects/RaceSim/RaceSim/Model/obj/Debug/net6.0/Model.AssemblyInfoInputs.cache
+/Users/sietsezee/Projects/RaceSim/RaceSim/Model/obj/Debug/net6.0/Model.AssemblyInfo.cs
+/Users/sietsezee/Projects/RaceSim/RaceSim/Model/obj/Debug/net6.0/Model.csproj.CoreCompileInputs.cache
+/Users/sietsezee/Projects/RaceSim/RaceSim/Model/obj/Debug/net6.0/Model.dll
+/Users/sietsezee/Projects/RaceSim/RaceSim/Model/obj/Debug/net6.0/refint/Model.dll
+/Users/sietsezee/Projects/RaceSim/RaceSim/Model/obj/Debug/net6.0/Model.pdb
+/Users/sietsezee/Projects/RaceSim/RaceSim/Model/obj/Debug/net6.0/ref/Model.dll

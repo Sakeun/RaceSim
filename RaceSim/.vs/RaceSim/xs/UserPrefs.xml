@@ -1,6 +1,51 @@
 ﻿<Properties StartupConfiguration="{0D8A2A32-72D9-47F3-A0B8-6B274C9B312E}|Default">
-  <MonoDevelop.Ide.ItemProperties.Controller FirstBuild="True" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Model/Driver.cs">
+    <Files>
+      <File FileName="RaceSim/Program.cs" Line="1" Column="1" />
+      <File FileName="Controller/Class1.cs" Line="6" Column="5" />
+      <File FileName="Model/Class1.cs" Line="1" Column="1" />
+      <File FileName="ControllerTest/UnitTest1.cs" Line="1" Column="1" />
+      <File FileName="Model/IEquipment.cs" Line="7" Column="19" />
+      <File FileName="Model/IParticipant.cs" Line="8" Column="43" />
+      <File FileName="Model/Car.cs" Line="1" Column="1" />
+      <File FileName="Model/Driver.cs" Line="18" Column="1" />
+      <File FileName="Model/SectionData.cs" Line="11" Column="28" />
+      <File FileName="Model/Competition.cs" Line="6" Column="41" />
+      <File FileName="Model/Track.cs" Line="7" Column="37" />
+      <File FileName="Model/Section.cs" Line="6" Column="30" />
+      <File FileName="Controller/Data.cs" Line="16" Column="65" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="RaceSim" expanded="True">
+            <Node name="Controller" expanded="True" />
+            <Node name="ControllerTest" expanded="True" />
+            <Node name="Model" expanded="True">
+              <Node name="Driver.cs" selected="True" />
+            </Node>
+            <Node name="RaceSim" expanded="True">
+              <Node name="Dependencies" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+      <Pad Id="MonoDevelop.UnitTesting.TestPad">
+        <State name="__root__">
+          <Node name="RaceSim" expanded="True" selected="True" />
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.RaceSim PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties.ControllerTest FirstBuild="True" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.ItemProperties.Model FirstBuild="True" />
-  <MonoDevelop.Ide.ItemProperties.RaceSim PreferredExecutionTarget="MonoDevelop.Default" FirstBuild="True" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
 </Properties>

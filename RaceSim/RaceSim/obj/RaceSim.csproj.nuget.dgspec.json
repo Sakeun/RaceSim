@@ -25,7 +25,11 @@
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "/Users/sietsezee/Projects/RaceSim/RaceSim/Model/Model.csproj": {
+                "projectPath": "/Users/sietsezee/Projects/RaceSim/RaceSim/Model/Model.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
