@@ -38,6 +38,11 @@ namespace Controller
                 return _positions[section];
             }
         }
+
+        public void SetStartPosition(Track track, IList<IParticipant> participants)
+        {
+            
+        }
     }
 }
 

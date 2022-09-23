@@ -1,19 +1,29 @@
 ﻿<Properties StartupConfiguration="{0D8A2A32-72D9-47F3-A0B8-6B274C9B312E}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Model/Driver.cs">
+  <MonoDevelop.Ide.ItemProperties.RaceSim PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Controller/Data.cs">
     <Files>
-      <File FileName="RaceSim/Program.cs" Line="1" Column="1" />
-      <File FileName="Controller/Class1.cs" Line="6" Column="5" />
+      <File FileName="RaceSim/Program.cs" Line="11" Column="1" />
+      <File FileName="Controller/Class1.cs" Line="5" Column="2" />
       <File FileName="Model/Class1.cs" Line="1" Column="1" />
-      <File FileName="ControllerTest/UnitTest1.cs" Line="1" Column="1" />
-      <File FileName="Model/IEquipment.cs" Line="7" Column="19" />
-      <File FileName="Model/IParticipant.cs" Line="8" Column="43" />
-      <File FileName="Model/Car.cs" Line="1" Column="1" />
-      <File FileName="Model/Driver.cs" Line="18" Column="1" />
-      <File FileName="Model/SectionData.cs" Line="11" Column="28" />
-      <File FileName="Model/Competition.cs" Line="6" Column="41" />
-      <File FileName="Model/Track.cs" Line="7" Column="37" />
-      <File FileName="Model/Section.cs" Line="6" Column="30" />
-      <File FileName="Controller/Data.cs" Line="16" Column="65" />
+      <File FileName="Model/IEquipment.cs" Line="7" Column="31" />
+      <File FileName="Model/IParticipant.cs" Line="18" Column="14" />
+      <File FileName="Model/Car.cs" Line="14" Column="6" />
+      <File FileName="Model/Driver.cs" Line="22" Column="37" />
+      <File FileName="Model/SectionData.cs" Line="12" Column="10" />
+      <File FileName="Model/Competition.cs" Line="11" Column="39" />
+      <File FileName="Model/Track.cs" Line="10" Column="25" />
+      <File FileName="Model/Section.cs" Line="8" Column="10" />
+      <File FileName="Controller/Data.cs" Line="48" Column="23" />
+      <File FileName="Controller/Race.cs" Line="8" Column="22" />
+      <File FileName="ControllerTest/Usings.cs" Line="1" Column="1" />
+      <File FileName="ControllerTest/Model_Competition_NextTrackShould.cs" Line="22" Column="41" />
+      <File FileName="RaceSim/Visualization.cs" Line="136" Column="18" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -21,9 +31,7 @@
           <Node name="RaceSim" expanded="True">
             <Node name="Controller" expanded="True" />
             <Node name="ControllerTest" expanded="True" />
-            <Node name="Model" expanded="True">
-              <Node name="Driver.cs" selected="True" />
-            </Node>
+            <Node name="Model" expanded="True" />
             <Node name="RaceSim" expanded="True">
               <Node name="Dependencies" expanded="True" />
             </Node>
@@ -40,12 +48,4 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.ItemProperties.RaceSim PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.ItemProperties.ControllerTest FirstBuild="True" />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
 </Properties>
