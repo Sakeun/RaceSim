@@ -1,29 +1,29 @@
 ﻿<Properties StartupConfiguration="{0D8A2A32-72D9-47F3-A0B8-6B274C9B312E}|Default">
   <MonoDevelop.Ide.ItemProperties.RaceSim PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Controller/Data.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Controller/Race.cs">
     <Files>
-      <File FileName="RaceSim/Program.cs" Line="11" Column="1" />
+      <File FileName="RaceSim/Program.cs" Line="21" Column="1" />
       <File FileName="Controller/Class1.cs" Line="5" Column="2" />
       <File FileName="Model/Class1.cs" Line="1" Column="1" />
       <File FileName="Model/IEquipment.cs" Line="7" Column="31" />
       <File FileName="Model/IParticipant.cs" Line="18" Column="14" />
-      <File FileName="Model/Car.cs" Line="14" Column="6" />
-      <File FileName="Model/Driver.cs" Line="22" Column="37" />
-      <File FileName="Model/SectionData.cs" Line="12" Column="10" />
+      <File FileName="Model/Driver.cs" Line="21" Column="37" />
+      <File FileName="Model/SectionData.cs" Line="7" Column="43" />
       <File FileName="Model/Competition.cs" Line="11" Column="39" />
       <File FileName="Model/Track.cs" Line="10" Column="25" />
-      <File FileName="Model/Section.cs" Line="8" Column="10" />
-      <File FileName="Controller/Data.cs" Line="48" Column="23" />
-      <File FileName="Controller/Race.cs" Line="8" Column="22" />
+      <File FileName="Model/Section.cs" Line="47" Column="11" />
+      <File FileName="Controller/Data.cs" Line="47" Column="59" />
+      <File FileName="Controller/Race.cs" Line="141" Column="1" />
       <File FileName="ControllerTest/Usings.cs" Line="1" Column="1" />
       <File FileName="ControllerTest/Model_Competition_NextTrackShould.cs" Line="22" Column="41" />
-      <File FileName="RaceSim/Visualization.cs" Line="136" Column="18" />
+      <File FileName="RaceSim/Visualization.cs" Line="130" Column="6" />
+      <File FileName="Model/DriversChangedEventArgs.cs" Line="5" Column="18" />
+      <File FileName="Model/Pod.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -48,4 +48,5 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

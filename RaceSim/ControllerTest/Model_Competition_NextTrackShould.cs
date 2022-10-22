@@ -63,6 +63,21 @@ namespace ControllerTest
             result = _competition.NextTrack();
             Assert.AreEqual(result, t2);
         }
+
+        [Test]
+        public void DrawTrack_TwoInQueue_ReturnSectionType()
+        {
+            SectionTypes[] types = { SectionTypes.Straight, SectionTypes.LeftCorner, SectionTypes.RightCorner, SectionTypes.StartGrid, SectionTypes.Finish };
+            Track t1 = new Track("Track1", types);
+            _competition.Tracks.Enqueue(t1);
+            Track t2 = new Track("Track2", types);
+            _competition.Tracks.Enqueue(t2);
+
+            var result = _competition.NextTrack();
+            Assert.AreEqual(result, t1);
+            result = _competition.NextTrack();
+            Assert.AreEqual(result, t2);
+        }
     }
 }
 

@@ -1,10 +1,14 @@
 ﻿using System;
 namespace Model
 {
-    public class Car : IEquipment
+    public class Pod : IEquipment
     {
-        public Car()
+        public Pod()
         {
+            Quality = 0;
+            Performance = 0;
+            Speed = 0;
+            IsBroken = false;
         }
 
         public int Quality { get; set; }
@@ -13,4 +17,3 @@ namespace Model
         public bool IsBroken { get; set; }
     }
 }
-

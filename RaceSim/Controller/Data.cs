@@ -1,5 +1,6 @@
 ﻿using System;
 using Model;
+
 namespace Controller
 {
     public static class Data
@@ -16,10 +17,10 @@ namespace Controller
 
         private static void addParticipants()
         {
-            Driver d1 = new Driver("Strijders", TeamColors.Green);
-            Driver d2 = new Driver("Helden", TeamColors.Red);
-            Driver d3 = new Driver("Beesten", TeamColors.Yellow);
-            Driver d4 = new Driver("Giganten", TeamColors.Blue);
+            Driver d1 = new Driver("Anakin", TeamColors.Yellow, new Pod());
+            Driver d2 = new Driver("Quadinaros", TeamColors.Red, new Pod());
+            Driver d3 = new Driver("Sebulba", TeamColors.Yellow, new Pod());
+            Driver d4 = new Driver("Nemesso", TeamColors.Blue, new Pod());
             Competition.Participants.Add(d1);
             Competition.Participants.Add(d2);
             Competition.Participants.Add(d3);
@@ -49,15 +50,15 @@ namespace Controller
             };
             SectionTypes[] raceTrack4 =
             {
-                SectionTypes.Straight, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.LeftCorner,
-                SectionTypes.RightCorner, SectionTypes.Finish, SectionTypes.StartGrid, SectionTypes.RightCorner,
+                SectionTypes.StartGrid, SectionTypes.StartGrid, SectionTypes.Finish, SectionTypes.RightCorner,
                 SectionTypes.Straight, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.RightCorner, SectionTypes.Straight,
                 SectionTypes.RightCorner, SectionTypes.LeftCorner, SectionTypes.RightCorner, SectionTypes.LeftCorner, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.Straight,
-                SectionTypes.RightCorner, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.RightCorner, SectionTypes.Straight
+                SectionTypes.RightCorner, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.RightCorner, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.LeftCorner,
+                SectionTypes.RightCorner, 
             };
-            Track t1 = new Track("RaceTrack", raceTrack4);
-            Track t2 = new Track("DesertTrack", types);
-            Track t3 = new Track("WaterTrack", types);
+            Track t1 = new Track("Aleen", raceTrack4);
+            Track t2 = new Track("Mon Gazza", types);
+            Track t3 = new Track("Baroonda", types);
             Competition.Tracks.Enqueue(t1);
             Competition.Tracks.Enqueue(t2);
             Competition.Tracks.Enqueue(t3);

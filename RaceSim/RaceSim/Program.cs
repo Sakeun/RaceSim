@@ -6,11 +6,21 @@ Competition c1 = new Competition();
 
 Data.Initialize(c1);
 
-Data.NextRace();
+Track data = Data.NextRace();
 //Console.BackgroundColor = ConsoleColor.DarkGray;
 
-//Visualization.DrawTrack(Data.CurrentRace.Track);
-Console.WriteLine(Data.CurrentRace.Track.Name);
+IParticipant[] users = Data.CurrentRace.Participants.ToArray();
+
+Visualization.DrawTrack(Data.CurrentRace.Track, users);
+//Console.WriteLine(Data.CurrentRace.Track.Name);
+
+Visualization.Initialize();
+
+Data.CurrentRace.Start();
+
+Visualization.OnDriversChanged(data, new DriversChangedEventArgs(Data.CurrentRace.Track, users));
+
+
 for (; ; )
 {
     Thread.Sleep(100);

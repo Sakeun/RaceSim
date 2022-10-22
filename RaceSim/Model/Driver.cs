@@ -14,11 +14,12 @@
         private TeamColors _teamColors;
         public TeamColors TeamColors { get { return _teamColors; } set { _teamColors = value; } }
 
-        public Driver(string name, TeamColors teamcolors)
+        public Driver(string name, TeamColors teamcolors, IEquipment equipment)
         {
             Name = name;
             Points = 0;
             TeamColors = teamcolors;
+            Equipment = equipment;
         }
     }
 }

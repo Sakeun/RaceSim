@@ -1,164 +1,225 @@
-using System.Net;
-using System.Threading.Channels;
+using Controller;
 using Model;
 namespace RaceSim;
 
 public static class Visualization
 {
-    static void Initialize()
+    public static void Initialize()
     {
-        
+        Data.CurrentRace.DriversChanged += OnDriversChanged;
     }
 
-    public static void DrawTrack(Track track)
+    // public static int[] SetConsolePositions(Track track)
+    // {
+    //
+    //     return LowestValxy;
+    // }
+
+    public static void DrawTrack(Track track, IParticipant[] users)
     {
+        Console.SetCursorPosition(0, 0);
         int[] xy = { 0 , 0 };
         int compass = 0;
-        int lowestValx = 0;
-        int lowestValy = 0;
+        int[] lowestValxy = { 0, 0 };
+        int userint = 0;
 
         foreach (Section section in track.Sections)
         {
             xy = section.SetPosition(xy, compass);
             compass = SetCompass(compass, section);
-            //Console.WriteLine($"X: {section.x} Y: {section.y} Type: {section.SectionType}");
-            if (section.x < lowestValx)
+            if (section.x < lowestValxy[0])
             {
-                lowestValx = section.x;
+                lowestValxy[0] = section.x;
             }
-            if (section.y < lowestValy)
+            if (section.y < lowestValxy[1])
             {
-                lowestValy = section.y;
+                lowestValxy[1] = section.y;
             }
         }
-
-        //Console.WriteLine();
-
-        //Console.WriteLine($"lowest X: {lowestValx}, Lowest Y: {lowestValy}");
+        
+        string[] DrawableTrack = new string[5];
         compass = 0;
         foreach (Section section in track.Sections)
         {
-            int xdir = section.x + Math.Abs(lowestValx);
-            int ydir = section.y + Math.Abs(lowestValy);
-            //Console.WriteLine($"X: {xdir*5} Y: {ydir*5} Type: {section.SectionType}, Compass: {compass}");
-            //Thread.Sleep(100);
-            CurrentTrack(section.SectionType, (xdir * 5), (ydir * 5), compass);
+            int xdir = section.x + Math.Abs(lowestValxy[0]);
+            int ydir = section.y + Math.Abs(lowestValxy[1]);
+            DrawableTrack = CurrentTrack(section.SectionType, compass);
+            DrawableTrack = DrawUser(DrawableTrack, users[userint], users[userint + 1], section);
+            PrintTrack(xdir * 5, ydir * 5, DrawableTrack);
             compass = SetCompass(compass, section);
+            //Data.CurrentRace.stck.Push(section);
         }
     }
 
-    private static void CurrentTrack(SectionTypes type, int x, int y, int dir)
+    private static string[] CurrentTrack(SectionTypes type, int dir)
     {
         string[] printable;
-        switch (type)
+
+        if ((type.Equals(SectionTypes.LeftCorner) && dir == 1) || (type.Equals(SectionTypes.RightCorner) && dir == 2))
         {
-            case SectionTypes.Straight:
-                if (dir is 1 or 3)
-                {
-                    printable = _trackVertical;
-                }
-                else
-                {
-                    printable = _trackStraight;
-                }
-                printFunction(x, y, printable);
-                break;
-            case SectionTypes.LeftCorner:
-                if (dir == 1)
-                {
-                    printable = _reverseLeftC;
-                } else if (dir == 3)
-                {
-                    printable = _trackRightC;
-                } else if (dir == 2)
-                {
-                    printable = _reverseRightC;
-                }
-                else
-                {
-                    printable = _trackLeftC;
-                }
-                printFunction(x, y, printable);
-                break;
-            case SectionTypes.RightCorner:
-                if (dir == 3)
-                {
-                    printable = _reverseRightC;
-                } else if (dir == 1)
-                {
-                    printable = _trackLeftC;
-                } else if (dir == 2)
-                {
-                    printable = _reverseLeftC;
-                }
-                else
-                {
-                    printable = _trackRightC;
-                }
-                printFunction(x, y, printable);
-                break;
-            case SectionTypes.Finish:
-                printFunction(x, y, _finishHorizontal);
-                break;
-            case SectionTypes.StartGrid:
-                printFunction(x, y, _startingGrid);
-                break;
+            printable = _reverseLeftC;
+        } else if ((type.Equals(SectionTypes.LeftCorner) && dir == 3) ||
+                   (type.Equals(SectionTypes.RightCorner) && dir == 0))
+        {
+            printable = _trackRightC;
+        } else if ((type.Equals(SectionTypes.LeftCorner) && dir == 2) ||
+                   (type.Equals(SectionTypes.RightCorner) && dir == 3))
+        {
+            printable = _reverseRightC;
+        } else if ((type.Equals(SectionTypes.LeftCorner) && dir == 0) ||
+                   (type.Equals(SectionTypes.RightCorner) && dir == 1))
+        {
+            printable = _trackLeftC;
+        } else if (type.Equals(SectionTypes.Straight) && (dir == 1 || dir == 3))
+        {
+            printable = _trackVertical;
+        } else if (type.Equals(SectionTypes.Finish))
+        {
+            printable = _finishHorizontal;
+        } else if (type.Equals(SectionTypes.StartGrid))
+        {
+            printable = _startingGrid;
         }
+        else
+        {
+            printable = _trackStraight;
+        }
+
+        return printable;
     }
 
-    private static void printFunction(int xax, int yax, string[] track)
+    private static string[] DrawUser(string[] startGrid, IParticipant left, IParticipant right, Section section)
+    {
+        string[] temp = new string[5];
+        startGrid.CopyTo(temp, 0);
+        SectionData data = Data.CurrentRace.GetSectionData(section);
+        for (int i = 0; i < startGrid.Length; i++)
+        {
+            if (data != null && data.Left != null)
+            {
+                temp[i] = temp[i].Replace("1", data.Left.Name.Substring(0, 1));
+            } else
+            {
+                temp[i] = temp[i].Replace("1", " ");
+            }
+            if (data != null && data.Right != null)
+            {
+                temp[i] = temp[i].Replace("2", data.Right.Name.Substring(0, 1));
+            }
+            else
+            {
+                temp[i] = temp[i].Replace("2", " ");
+            }
+        }
+
+        return temp;
+    }
+
+    private static void PrintTrack(int xax, int yax, string[] track)
     {
         Console.SetCursorPosition(xax, yax);
-        //Console.WriteLine(Console.CursorTop);
         foreach (string p in track)
         {
-            Console.WriteLine(p);
+            Console.Write(p);
             yax++;
             Console.SetCursorPosition(xax, yax);
         }
     }
 
+    public static void OnDriversChanged(object? sender, DriversChangedEventArgs e)
+    {
+        Data.CurrentRace.MovePlayer(e.Users);
+        DrawTrack(Data.CurrentRace.Track, e.Users);
+    }
+
     private static int SetCompass(int dir, Section sec)
     {
-        switch (sec.SectionType)
+        if (sec.SectionType == SectionTypes.RightCorner)
         {
-            case SectionTypes.RightCorner:
-            {
-                dir++;
-                if (dir == 4)
-                {
-                    dir = 0;
-                }
-
-                break;
-            }
-            case SectionTypes.LeftCorner:
-            {
-                dir--;
-                if (dir == -1)
-                {
-                    dir = 3;
-                }
-
-                break;
-            }
+            dir++;
+        } else if (sec.SectionType == SectionTypes.LeftCorner)
+        {
+            dir--;
+        }
+        if (dir == 4)
+        {
+            dir = 0;
+        } else if (dir == -1)
+        {
+            dir = 3;
         }
 
         return dir;
     }
     
     #region graphics
-    private static string[] _finishHorizontal = { "-----", " FI  ", " FI  ", "-----" , "     "};
-    private static string[] _startingGrid = { "-----", "# #  ", " # # ", "-----", "     " };
+    private static string[] _finishHorizontal =
+    {
+        "-----", 
+        "1  FI", 
+        "2  FI", 
+        "-----", 
+        "     "
+    };
+    private static string[] _startingGrid =
+    {
+        "-----", 
+        " #1  ", 
+        "   #2", 
+        "-----", 
+        "     "
+    };
     
-    private static string[] _trackStraight = { "-----", "     ", "     ", "-----", "     "};
-    private static string[] _trackVertical = { "|   |", "|   |", "|   |", "|   |", "|   |" };
+    private static string[] _trackStraight =
+    {
+        "-----", 
+        "1    ", 
+        "2    ", 
+        "-----", 
+        "     "
+    };
+    private static string[] _trackVertical =
+    {
+        "|1 2|", 
+        "|   |", 
+        "|   |", 
+        "|   |", 
+        "|   |"
+    };
     
-    private static string[] _trackRightC = { "----\\", "    |", "    |", "\\   |", "|   |" };
-    private static string[] _reverseRightC = { "/----", "|     ", "|    ", "|   /-", "|   |   " };
+    private static string[] _trackRightC =
+    {
+        "----\\", 
+        "1   |", 
+        "2   |", 
+        "\\   |", 
+        "|   |"
+    };
+    private static string[] _reverseRightC =
+    {
+        "/----", 
+        "|    ", 
+        "|    ", 
+        "|   /", 
+        "|1 2|"
+    };
 
-    private static string[] _trackLeftC = { "/   |", "    |", "    |", "----/", "     " };
-    private static string[] _reverseLeftC = { "|   \\-" , "|     ", "|    ", "\\----", "     "};
+    private static string[] _trackLeftC =
+    {
+        "/   |", 
+        "1   |", 
+        "2   |", 
+        "----/", 
+        "     "
+    };
+    private static string[] _reverseLeftC =
+    {
+        "|  \\-" , 
+        "|   1", 
+        "|   2", 
+        "\\----", 
+        "     "
+    };
 
     #endregion
 }
