@@ -9,12 +9,6 @@ public static class Visualization
         Data.CurrentRace.DriversChanged += OnDriversChanged;
     }
 
-    // public static int[] SetConsolePositions(Track track)
-    // {
-    //
-    //     return LowestValxy;
-    // }
-
     public static void DrawTrack(Track track, IParticipant[] users)
     {
         Console.SetCursorPosition(0, 0);
@@ -128,8 +122,17 @@ public static class Visualization
 
     public static void OnDriversChanged(object? sender, DriversChangedEventArgs e)
     {
-        Data.CurrentRace.MovePlayer(e.Users);
         DrawTrack(Data.CurrentRace.Track, e.Users);
+        Data.CurrentRace.MovePlayer(e.Users);
+
+        if (Data.CurrentRace.RaceDone)
+        {
+            Data.CurrentRace.MovePlayer(e.Users);
+            DrawTrack(Data.CurrentRace.Track, e.Users);
+            Console.Clear();
+            Data.CurrentRace.DriversChanged -= OnDriversChanged;
+            Data.CurrentRace.DriversChanged += OnDriversChanged;
+        }
     }
 
     private static int SetCompass(int dir, Section sec)

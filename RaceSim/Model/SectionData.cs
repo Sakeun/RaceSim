@@ -32,12 +32,6 @@ namespace Model
                 Left = null;
             }
         }
-
-        public void AddSecondPlayer(IParticipant p, int distance)
-        {
-            Right = p;
-            DistanceRight = distance;
-        }
     }
 }
 

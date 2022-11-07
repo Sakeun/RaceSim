@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Channels;
-using System.Timers;
+﻿using System.Timers;
 using Model;
 using Timer = System.Timers.Timer;
 
@@ -9,6 +7,7 @@ namespace Controller
     public class Race
     {
         public event EventHandler<DriversChangedEventArgs> DriversChanged;
+        public event EventHandler NextRaceStart;
         public Track Track { get; set; }
         public IList<IParticipant> Participants { get; set; }
         public DateTime StartTime { get; set; }
@@ -18,6 +17,8 @@ namespace Controller
         private Timer _timer { get; set; } = new(500);
 
         private Dictionary<IParticipant, Stack<Section>> _playerStack { get; set; } = new ();
+        
+        public bool RaceDone { get; set; }
 
         public Race(Track track, IList<IParticipant> participants)
         {
@@ -26,15 +27,23 @@ namespace Controller
             StartTime = new DateTime();
             _random = new Random(DateTime.Now.Millisecond);
             _positions = new Dictionary<Section, SectionData>();
-            SetStartPosition(Track, Participants);
+            SetStartPosition(Track);
             RandomizeEquipment();
 
             foreach (IParticipant p in participants)
             {
                 _playerStack.Add(p, CreateStack());
+                if (_playerStack.Count > 2)
+                {
+                    _playerStack[p].Pop();
+                }
             }
 
             _timer.Elapsed += OnTimedEvent;
+            
+            Start();
+            
+            OnTimedEvent(this, null);
         }
 
         //Randomize the equipment of the participants in the race
@@ -42,9 +51,9 @@ namespace Controller
         {
             foreach(IParticipant participant in Participants)
             {
-                participant.Equipment.Quality = _random.Next(20, 100);
+                participant.Equipment.Quality = _random.Next(80, 200);
                 participant.Equipment.Performance = _random.Next(1, 3);
-                participant.Equipment.Speed = _random.Next(1, 25);
+                participant.Equipment.Speed = _random.Next(10, 25);
             }
         }
 
@@ -84,39 +93,35 @@ namespace Controller
          * then if the positions library has the current section in it, the player will get added to said section
          * if not, a new position will get created and the section will get added to it
          */
-        public SectionData MoveLeftPlayerNextSection(Section currentSection, Section nextSection, IParticipant participant, int distance)
+        private Section MovePlayerNextSection(Section currentSection, Section nextSection, IParticipant participant,
+            int distance, bool isRight)
         {
+            if (NextTrackContainsPlayer(nextSection, isRight)) 
+                return currentSection;
+            
             RemovePlayerFromSection(currentSection, participant);
-            if (_positions.ContainsKey(nextSection))
-            {
-                _positions[nextSection].Left = participant;
-                _positions[nextSection].DistanceLeft = distance;
-                return _positions[nextSection];
-            }
-
-            //SectionData s = _positions[nextSection];
-            _positions.Add(nextSection, new SectionData(participant, distance, false)); 
-            return _positions[nextSection]; 
-        }
-        
-        public SectionData MoveRightPlayerNextSection(Section currentSection, Section nextSection, IParticipant participant, int distance)
-        {
-            RemovePlayerFromSection(currentSection, participant);
-            if (_positions.ContainsKey(nextSection))
+            if (_positions.ContainsKey(nextSection) && isRight)
             {
                 _positions[nextSection].Right = participant;
-                _positions[nextSection].DistanceRight = distance;
-                return _positions[nextSection];
+                _positions[nextSection].DistanceRight = distance - 100;
+                return nextSection;
+            } 
+            if(_positions.ContainsKey(nextSection))
+            {
+                _positions[nextSection].Left = participant;
+                _positions[nextSection].DistanceLeft = distance - 100;
+                return nextSection;
             }
 
-            //SectionData s = _positions[nextSection];
-            _positions.Add(nextSection, new SectionData(participant, distance, true)); 
-            return _positions[nextSection]; 
+            _positions.Add(nextSection, new SectionData(participant, distance - 100, isRight));
+            return nextSection;
+            
         }
 
-        private void OnTimedEvent(object sender, ElapsedEventArgs e)
+        public void OnTimedEvent(object sender, ElapsedEventArgs e)
         {
-            DriversChanged(this, new DriversChangedEventArgs(Track, Participants.ToArray()));
+            DriversChanged?.Invoke(this, new DriversChangedEventArgs(Track, Participants.ToArray()));
+            NextRaceStart?.Invoke(this, EventArgs.Empty);
         }
 
         // Calculates the speed a user has to move
@@ -129,15 +134,47 @@ namespace Controller
          * full function to move a player:
          * if the positions 
          */
-        public void MovePlayer(IParticipant[] p)
+        public void MovePlayer(IParticipant[] participants)
         {
-            //Stack<Section> stack = ReverseStack();
-            foreach (IParticipant participant in p)
+            foreach (IParticipant participant in participants)
             {
+                Section current = _playerStack[participant].Pop();;
+                Section next;
                 int distance = 0;
                 bool isRight = false;
-                Section current = _playerStack[participant].Pop();
-                Section next = _playerStack[participant].Peek();
+                
+                FixBreakCar(participant);
+
+                if (participant.Equipment.IsBroken)
+                {
+                    continue;
+                }
+                
+                if (participant.Rounds == 2 && current.SectionType == SectionTypes.Finish)
+                {
+                    if (_positions.ContainsKey(current) && (_positions[current].Left == participant ||
+                                                            _positions[current].Right == participant))
+                    {
+                        RemovePlayerFromSection(current, participant);
+                    }
+
+                    participant.Rounds++;
+                    CheckRaceDone(participants);
+                    _playerStack[participant].Push(current);
+                    continue;
+                }
+                
+                if (_playerStack[participant].Count > 1)
+                {
+                    next = _playerStack[participant].Peek();
+                }
+                else
+                {
+                    _playerStack[participant] = CreateStack();
+                    next = _playerStack[participant].Peek();
+                    participant.Rounds++;
+                }
+
                 if (_positions.ContainsKey(current))
                 {
                     if (_positions[current].Left == participant)
@@ -151,15 +188,20 @@ namespace Controller
                         isRight = true;
                     }
                 }
-
-                if (distance >= 100 && isRight)
+                
+                if (distance >= 200)
                 {
-                    
-                    SectionData s = MoveRightPlayerNextSection(current, next, participant, distance - 100);
+                    _playerStack[participant].Pop();
+                    next = _playerStack[participant].Peek();
+                    distance -= 100;
                 }
-                else if(distance >= 100)
+                if (distance >= 100)
                 {
-                    SectionData s = MoveLeftPlayerNextSection(current, next, participant, distance - 100);
+                    Section s = MovePlayerNextSection(current, next, participant, distance, isRight);
+                    if (s == current)
+                    {
+                        _playerStack[participant].Push(current);
+                    }
                 }
                 else
                 {
@@ -174,21 +216,12 @@ namespace Controller
             foreach (Section s in Track.Sections)
             {
                 temp1.Push(s);
-                Console.WriteLine(s.SectionType);
             }
             Stack<Section> temp = new Stack<Section>();
-            Queue<Section> queue = new Queue<Section>();
             while (temp1.Count > 0)
             {
                 temp.Push(temp1.Pop());
-                //queue.Enqueue(stck.Pop());
             }
-
-            // while (queue.Count > 0)
-            // {
-            //     stck.Push(queue.Dequeue());
-            // }
-
             return temp;
         }
 
@@ -198,7 +231,7 @@ namespace Controller
             _timer.Start();
         }
 
-        public void SetStartPosition(Track track, IList<IParticipant> participants)
+        public void SetStartPosition(Track track)
         {
             int currentP = 0;
             foreach(Section section in track.Sections)
@@ -215,23 +248,56 @@ namespace Controller
 
         private bool NextTrackContainsPlayer(Section next, bool isRight)
         {
-            if (isRight)
+            if (_positions.ContainsKey(next))
             {
-                if (_positions.ContainsKey(next) && _positions[next].Right != null)
+                if (isRight)
                 {
-                    return true;
+                    return _positions[next].Right != null;
                 }
 
-                return false;
-            }
-            if (_positions.ContainsKey(next) && _positions[next].Left != null) 
-            {
-                return true;
+                return _positions[next].Left != null;
             }
 
             return false;
         }
+
+        private void CheckRaceDone(IParticipant[] players)
+        {
+            int check = 0;
+
+            foreach (IParticipant p in players)
+            {
+                if(p.Rounds == 3)
+                {
+                    check++;
+                }
+            }
+
+            if (check >= _playerStack.Count)
+            {
+                RaceDone = true;
+            }
+        }
+
+        private void FixBreakCar(IParticipant participant)
+        {
+            var number = _random.Next(0, 10);
+
+            if ((participant.Equipment.Quality < (number * 10)) && !participant.Equipment.IsBroken)
+            {
+                participant.Equipment.IsBroken = true;
+            }
+
+            if (participant.Equipment.Quality >= (number * 10) && participant.Equipment.IsBroken)
+            {
+                participant.Equipment.IsBroken = false;
+                participant.Equipment.Quality -= 5;
+                if (participant.Equipment.Quality <= 10)
+                {
+                    participant.Equipment.Quality = 10;
+                }
+            }
+        }
     }
     
 }
-
