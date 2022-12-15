@@ -14,22 +14,8 @@ public static class Visualization
         Console.SetCursorPosition(0, 0);
         int[] xy = { 0 , 0 };
         int compass = 0;
-        int[] lowestValxy = { 0, 0 };
         int userint = 0;
-
-        foreach (Section section in track.Sections)
-        {
-            xy = section.SetPosition(xy, compass);
-            compass = SetCompass(compass, section);
-            if (section.x < lowestValxy[0])
-            {
-                lowestValxy[0] = section.x;
-            }
-            if (section.y < lowestValxy[1])
-            {
-                lowestValxy[1] = section.y;
-            }
-        }
+        int[] lowestValxy = SetLowestVal(track);
         
         string[] DrawableTrack = new string[5];
         compass = 0;
@@ -43,6 +29,28 @@ public static class Visualization
             compass = SetCompass(compass, section);
             //Data.CurrentRace.stck.Push(section);
         }
+    }
+
+    public static int[] SetLowestVal(Track track)
+    {
+        int[] xy = { 0, 0 };
+        int[] lowestValxy = { 0, 0 };
+        int compass = 0;
+        foreach (Section section in track.Sections)
+        {
+            xy = section.SetPosition(xy, compass);
+            compass = SetCompass(compass, section);
+            if (section.x < lowestValxy[0])
+            {
+                lowestValxy[0] = section.x;
+            }
+            if (section.y < lowestValxy[1])
+            {
+                lowestValxy[1] = section.y;
+            }
+        }
+
+        return lowestValxy;
     }
 
     private static string[] CurrentTrack(SectionTypes type, int dir)

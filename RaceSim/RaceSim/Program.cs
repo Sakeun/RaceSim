@@ -1,5 +1,6 @@
 ﻿using Model;
 using Controller;
+//using WPF_App;
 using RaceSim;
 
 Competition c1 = new Competition();

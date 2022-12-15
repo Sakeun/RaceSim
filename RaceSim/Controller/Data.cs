@@ -58,7 +58,7 @@ namespace Controller
                 SectionTypes.RightCorner, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.RightCorner, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.LeftCorner,
                 SectionTypes.RightCorner, 
             };
-            Track t1 = new Track("Aleen", raceTrack);
+            Track t1 = new Track("Aleen", raceTrack4);
             Track t2 = new Track("Mon Gazza", raceTrack);
             Track t3 = new Track("Baroonda", types);
             Competition.Tracks.Enqueue(t1);

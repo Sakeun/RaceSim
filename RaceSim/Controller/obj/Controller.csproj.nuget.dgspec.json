@@ -1,33 +1,35 @@
 {
   "format": 1,
   "restore": {
-    "/Users/sietsezee/Projects/RaceSim/RaceSim/Controller/Controller.csproj": {}
+    "\\\\Mac\\Home\\Documents\\RaceSim\\RaceSim\\Controller\\Controller.csproj": {}
   },
   "projects": {
-    "/Users/sietsezee/Projects/RaceSim/RaceSim/Controller/Controller.csproj": {
+    "\\\\Mac\\Home\\Documents\\RaceSim\\RaceSim\\Controller\\Controller.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/sietsezee/Projects/RaceSim/RaceSim/Controller/Controller.csproj",
+        "projectUniqueName": "\\\\Mac\\Home\\Documents\\RaceSim\\RaceSim\\Controller\\Controller.csproj",
         "projectName": "Controller",
-        "projectPath": "/Users/sietsezee/Projects/RaceSim/RaceSim/Controller/Controller.csproj",
-        "packagesPath": "/Users/sietsezee/.nuget/packages/",
-        "outputPath": "/Users/sietsezee/Projects/RaceSim/RaceSim/Controller/obj/",
+        "projectPath": "\\\\Mac\\Home\\Documents\\RaceSim\\RaceSim\\Controller\\Controller.csproj",
+        "packagesPath": "C:\\Users\\sietsezee\\.nuget\\packages\\",
+        "outputPath": "\\\\Mac\\Home\\Documents\\RaceSim\\RaceSim\\Controller\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/sietsezee/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\sietsezee\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "/Users/sietsezee/Projects/RaceSim/RaceSim/Model/Model.csproj": {
-                "projectPath": "/Users/sietsezee/Projects/RaceSim/RaceSim/Model/Model.csproj"
+              "\\\\Mac\\Home\\Documents\\RaceSim\\RaceSim\\Model\\Model.csproj": {
+                "projectPath": "\\\\Mac\\Home\\Documents\\RaceSim\\RaceSim\\Model\\Model.csproj"
               }
             }
           }
@@ -41,6 +43,12 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "System.Drawing.Common": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -57,26 +65,28 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.401/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "/Users/sietsezee/Projects/RaceSim/RaceSim/Model/Model.csproj": {
+    "\\\\Mac\\Home\\Documents\\RaceSim\\RaceSim\\Model\\Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/sietsezee/Projects/RaceSim/RaceSim/Model/Model.csproj",
+        "projectUniqueName": "\\\\Mac\\Home\\Documents\\RaceSim\\RaceSim\\Model\\Model.csproj",
         "projectName": "Model",
-        "projectPath": "/Users/sietsezee/Projects/RaceSim/RaceSim/Model/Model.csproj",
-        "packagesPath": "/Users/sietsezee/.nuget/packages/",
-        "outputPath": "/Users/sietsezee/Projects/RaceSim/RaceSim/Model/obj/",
+        "projectPath": "\\\\Mac\\Home\\Documents\\RaceSim\\RaceSim\\Model\\Model.csproj",
+        "packagesPath": "C:\\Users\\sietsezee\\.nuget\\packages\\",
+        "outputPath": "\\\\Mac\\Home\\Documents\\RaceSim\\RaceSim\\Model\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/sietsezee/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\sietsezee\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -94,6 +104,12 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "System.Drawing.Common": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -110,7 +126,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.401/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

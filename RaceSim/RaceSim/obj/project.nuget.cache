@@ -1,8 +1,21 @@
 {
   "version": 2,
-  "dgSpecHash": "JMNzcoo2+dHoPnlsFkSvxrH7T87F5cZ/Z7V+R2I//v0c6pT/wHoKx3OOJTeCAm1HNzuzrbIcGqsgtxAJ9j9Ryw==",
-  "success": true,
-  "projectFilePath": "/Users/sietsezee/Projects/RaceSim/RaceSim/RaceSim/RaceSim.csproj",
-  "expectedPackageFiles": [],
-  "logs": []
+  "dgSpecHash": "6UPCSjq/Jvvcuh8kAtbDFdyvzvSfAx0/TnVlw47+2HufYxulx+ey63RNxksPrqs4QnhYCvsMQZj4nNIEhQYnPA==",
+  "success": false,
+  "projectFilePath": "\\\\Mac\\Home\\Documents\\RaceSim\\RaceSim\\RaceSim\\RaceSim.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\sietsezee\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
+    "C:\\Users\\sietsezee\\.nuget\\packages\\system.drawing.common\\6.0.0\\system.drawing.common.6.0.0.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1201",
+      "level": "Error",
+      "message": "Project WPF_App is not compatible with net6.0 (.NETCoreApp,Version=v6.0). Project WPF_App supports: net6.0-windows7.0 (.NETCoreApp,Version=v6.0)",
+      "libraryId": "WPF_App",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    }
+  ]
 }

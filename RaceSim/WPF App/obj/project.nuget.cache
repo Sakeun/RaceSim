@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "9vEMFs6zbPOKYKWRl3VBy2kKtGYIcEnQaxO63Ntu+oFNXA1bmhUw2SUosPzdZ6qqVReEifVkFD+TOvPq4GK5OQ==",
+  "success": true,
+  "projectFilePath": "\\\\Mac\\Home\\Documents\\RaceSim\\RaceSim\\WPF App\\WPF_App.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\sietsezee\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
+    "C:\\Users\\sietsezee\\.nuget\\packages\\system.drawing.common\\6.0.0\\system.drawing.common.6.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

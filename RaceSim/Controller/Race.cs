@@ -20,6 +20,8 @@ namespace Controller
         
         public bool RaceDone { get; set; }
 
+        private int _totalTrackDistance = 1000;
+
         public Race(Track track, IList<IParticipant> participants)
         {
             Track = track;
@@ -103,17 +105,17 @@ namespace Controller
             if (_positions.ContainsKey(nextSection) && isRight)
             {
                 _positions[nextSection].Right = participant;
-                _positions[nextSection].DistanceRight = distance - 100;
+                _positions[nextSection].DistanceRight = distance - _totalTrackDistance;
                 return nextSection;
             } 
             if(_positions.ContainsKey(nextSection))
             {
                 _positions[nextSection].Left = participant;
-                _positions[nextSection].DistanceLeft = distance - 100;
+                _positions[nextSection].DistanceLeft = distance - _totalTrackDistance;
                 return nextSection;
             }
 
-            _positions.Add(nextSection, new SectionData(participant, distance - 100, isRight));
+            _positions.Add(nextSection, new SectionData(participant, distance - _totalTrackDistance, isRight));
             return nextSection;
             
         }
@@ -138,6 +140,10 @@ namespace Controller
         {
             foreach (IParticipant participant in participants)
             {
+                if (_playerStack[participant].Count == 0)
+                {
+                    continue;
+                } 
                 Section current = _playerStack[participant].Pop();;
                 Section next;
                 int distance = 0;
@@ -189,13 +195,13 @@ namespace Controller
                     }
                 }
                 
-                if (distance >= 200)
+                if (distance >= (_totalTrackDistance * 2))
                 {
                     _playerStack[participant].Pop();
                     next = _playerStack[participant].Peek();
-                    distance -= 100;
+                    distance -= _totalTrackDistance;
                 }
-                if (distance >= 100)
+                if (distance >= _totalTrackDistance)
                 {
                     Section s = MovePlayerNextSection(current, next, participant, distance, isRight);
                     if (s == current)

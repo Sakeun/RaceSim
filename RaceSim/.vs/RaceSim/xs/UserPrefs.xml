@@ -1,14 +1,15 @@
 ﻿<Properties StartupConfiguration="{0D8A2A32-72D9-47F3-A0B8-6B274C9B312E}|Default">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.RaceSim PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Model/Competition.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="RaceSim/Visualization.cs">
     <Files>
       <File FileName="RaceSim/Program.cs" Line="21" Column="1" />
       <File FileName="Controller/Class1.cs" Line="5" Column="2" />
-      <File FileName="Model/Class1.cs" Line="1" Column="1" />
       <File FileName="Model/IEquipment.cs" Line="7" Column="31" />
       <File FileName="Model/IParticipant.cs" Line="20" Column="14" />
       <File FileName="Model/Driver.cs" Line="23" Column="37" />
@@ -20,7 +21,7 @@
       <File FileName="Controller/Race.cs" Line="137" Column="1" />
       <File FileName="ControllerTest/Usings.cs" Line="1" Column="1" />
       <File FileName="ControllerTest/Model_Competition_NextTrackShould.cs" Line="22" Column="41" />
-      <File FileName="RaceSim/Visualization.cs" Line="130" Column="6" />
+      <File FileName="RaceSim/Visualization.cs" Line="130" Column="1" />
       <File FileName="Model/DriversChangedEventArgs.cs" Line="5" Column="18" />
       <File FileName="Model/Pod.cs" Line="1" Column="1" />
     </Files>
@@ -33,6 +34,7 @@
             <Node name="Model" expanded="True" />
             <Node name="RaceSim" expanded="True">
               <Node name="Dependencies" expanded="True" />
+              <Node name="Visualization.cs" selected="True" />
             </Node>
           </Node>
         </State>
@@ -47,6 +49,4 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.ItemProperties.RaceSim PreferredExecutionTarget="MonoDevelop.Default" />
-  <MultiItemStartupConfigurations />
 </Properties>
