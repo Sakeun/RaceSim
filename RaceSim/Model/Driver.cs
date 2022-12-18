@@ -16,6 +16,8 @@
 
         public int Rounds { get; set; }
 
+        public int TimesBroken { get; set; }
+
         public Driver(string name, TeamColors teamcolors, IEquipment equipment)
         {
             Name = name;
@@ -23,6 +25,7 @@
             TeamColors = teamcolors;
             Equipment = equipment;
             Rounds = 0;
+            TimesBroken = 0;
         }
     }
 }

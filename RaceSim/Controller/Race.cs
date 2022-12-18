@@ -1,26 +1,30 @@
 ﻿using System.Timers;
 using Model;
+using System.Linq;
 using Timer = System.Timers.Timer;
+using System.Diagnostics;
 
 namespace Controller
 {
     public class Race
     {
         public event EventHandler<DriversChangedEventArgs> DriversChanged;
-        public event EventHandler NextRaceStart;
+        public event EventHandler<EventArgs> NextRaceStart;
         public Track Track { get; set; }
         public IList<IParticipant> Participants { get; set; }
         public DateTime StartTime { get; set; }
         private Random _random { get; set; }
         private Dictionary<Section, SectionData> _positions { get; set; }
 
-        private Timer _timer { get; set; } = new(500);
+        private Timer _timer { get; set; } = new(1000);
 
         private Dictionary<IParticipant, Stack<Section>> _playerStack { get; set; } = new ();
         
         public bool RaceDone { get; set; }
 
         private int _totalTrackDistance = 1000;
+
+        public string FirstPlace;
 
         public Race(Track track, IList<IParticipant> participants)
         {
@@ -53,7 +57,7 @@ namespace Controller
         {
             foreach(IParticipant participant in Participants)
             {
-                participant.Equipment.Quality = _random.Next(80, 200);
+                participant.Equipment.Quality = _random.Next(500, 1000);
                 participant.Equipment.Performance = _random.Next(1, 3);
                 participant.Equipment.Speed = _random.Next(10, 25);
             }
@@ -95,7 +99,7 @@ namespace Controller
          * then if the positions library has the current section in it, the player will get added to said section
          * if not, a new position will get created and the section will get added to it
          */
-        private Section MovePlayerNextSection(Section currentSection, Section nextSection, IParticipant participant,
+        public Section MovePlayerNextSection(Section currentSection, Section nextSection, IParticipant participant,
             int distance, bool isRight)
         {
             if (NextTrackContainsPlayer(nextSection, isRight)) 
@@ -138,13 +142,17 @@ namespace Controller
          */
         public void MovePlayer(IParticipant[] participants)
         {
+            FirstPlace = GetFirstPlace();
             foreach (IParticipant participant in participants)
             {
                 if (_playerStack[participant].Count == 0)
                 {
                     continue;
-                } 
-                Section current = _playerStack[participant].Pop();;
+                }
+				Section current = _playerStack[participant].Peek();
+                //Section active = _playerStack[participant].First.Value;
+                _playerStack[participant].Pop();
+                Trace.WriteLine(current.SectionType);
                 Section next;
                 int distance = 0;
                 bool isRight = false;
@@ -155,8 +163,11 @@ namespace Controller
                 {
                     continue;
                 }
-                
-                if (participant.Rounds == 2 && current.SectionType == SectionTypes.Finish)
+                if(current.SectionType == SectionTypes.Finish)
+                {
+					participant.Rounds++;
+				}
+				if (participant.Rounds >= 2 && current.SectionType == SectionTypes.Finish)
                 {
                     if (_positions.ContainsKey(current) && (_positions[current].Left == participant ||
                                                             _positions[current].Right == participant))
@@ -164,7 +175,11 @@ namespace Controller
                         RemovePlayerFromSection(current, participant);
                     }
 
-                    participant.Rounds++;
+                    var totalRounds = participants.Where(i => i.Name != participant.Name).Select(i => i.Rounds).ToList();
+                    if(!totalRounds.Contains(4) && participant.Points == 0)
+                    {
+                        participant.Points++;
+                    }
                     CheckRaceDone(participants);
                     _playerStack[participant].Push(current);
                     continue;
@@ -177,11 +192,15 @@ namespace Controller
                 else
                 {
                     _playerStack[participant] = CreateStack();
-                    next = _playerStack[participant].Peek();
-                    participant.Rounds++;
+                    if (_playerStack[participant].Count >= 1)
+                    {
+                        next = _playerStack[participant].Peek();
+                    }
+                    else next = null;
                 }
 
-                if (_positions.ContainsKey(current))
+
+				if (_positions.ContainsKey(current))
                 {
                     if (_positions[current].Left == participant)
                     {
@@ -213,12 +232,15 @@ namespace Controller
                 {
                     _playerStack[participant].Push(current);
                 }
+
+                //CheckNextSectionFinish(current, participant);
             }
         }
 
         private Stack<Section> CreateStack()
         {
             Stack<Section> temp1 = new Stack<Section>();
+            if (Track == null) return temp1;
             foreach (Section s in Track.Sections)
             {
                 temp1.Push(s);
@@ -237,6 +259,11 @@ namespace Controller
             _timer.Start();
         }
 
+        public void Stop()
+        {
+            _timer.Stop();
+        }
+
         public void SetStartPosition(Track track)
         {
             int currentP = 0;
@@ -244,7 +271,6 @@ namespace Controller
             {
                 if (section.SectionType == SectionTypes.StartGrid)
                 {
-                    //GetSectionData(section, Participants[currentP], Participants[currentP + 1], 40, 80);
                     _positions.Add(section, new SectionData(Participants[currentP], Participants[currentP + 1], 40, 80));
                     Console.WriteLine($"P1: {Participants[currentP].Name} P2: {Participants[currentP + 1].Name}");
                     currentP += 2;
@@ -273,7 +299,7 @@ namespace Controller
 
             foreach (IParticipant p in players)
             {
-                if(p.Rounds == 3)
+                if(p.Rounds >= 2)
                 {
                     check++;
                 }
@@ -288,8 +314,7 @@ namespace Controller
         private void FixBreakCar(IParticipant participant)
         {
             var number = _random.Next(0, 10);
-
-            if ((participant.Equipment.Quality < (number * 10)) && !participant.Equipment.IsBroken)
+            if (participant.Equipment.Quality < (number * 10) && !participant.Equipment.IsBroken)
             {
                 participant.Equipment.IsBroken = true;
             }
@@ -297,11 +322,43 @@ namespace Controller
             if (participant.Equipment.Quality >= (number * 10) && participant.Equipment.IsBroken)
             {
                 participant.Equipment.IsBroken = false;
-                participant.Equipment.Quality -= 5;
+				participant.TimesBroken++;
+				participant.Equipment.Quality -= 5;
                 if (participant.Equipment.Quality <= 10)
                 {
-                    participant.Equipment.Quality = 10;
+                    participant.Equipment.Quality = 100;
                 }
+            }
+        }
+
+        private string GetFirstPlace()
+        {
+            int stackCount = 0;
+
+			if (Track != null)
+            {
+                stackCount = Track.Sections.Count;
+            }
+            int laps = 0;
+            string highestParticipant = "";
+            foreach(var participant in Participants)
+            {
+                if (_playerStack[participant].Count <= stackCount && participant.Rounds >= laps)
+                {
+                    stackCount = _playerStack[participant].Count;
+                    highestParticipant = participant.Name;
+                    laps = participant.Rounds;
+                }
+            }
+
+            return highestParticipant;
+        }
+
+        private void CheckNextSectionFinish(Section section, IParticipant participant)
+        {
+            if(section.SectionType == SectionTypes.Finish)
+            {
+                participant.Rounds++;
             }
         }
     }

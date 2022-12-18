@@ -7,8 +7,8 @@ namespace Model
         int Points { get; set; }
         IEquipment Equipment { get; set; }
         TeamColors TeamColors { get; set; }
-        
         int Rounds { get; set; }
+        int TimesBroken { get; set; }
     }
 
 

@@ -7,8 +7,21 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="982" Width="1512">
     <Grid Background="#FF6ED862" Width="1512" Height="982">
+        <Label FontSize="72">
+            <Label Content="{Binding CurrentTrackName, Mode=OneWay}"/>
+        </Label>
         <Image x:Name="ImageDraw" Margin="256,-8,256,-9" Height="982
                " Width="1000"/>
+        <DockPanel LastChildFill="False" Margin="-10,0,10,0">
+            <Menu Width="100" DockPanel.Dock="Top" Height="20" VerticalAlignment="Top">
+                <MenuItem Header="Menu">
+                    <MenuItem Header="Race" Click="MenuItem_Race_Click"/>
+                    <MenuItem Header="Players" Click="MenuItem_Players_Click"/>
+                    <MenuItem Header="Exit" Click="MenuItem_Exit_Click"/>
+                </MenuItem>
+
+            </Menu>
+        </DockPanel>
 
     </Grid>
 </Window>

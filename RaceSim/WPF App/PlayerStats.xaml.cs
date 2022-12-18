@@ -22,6 +22,7 @@ namespace WPF_App
 		public PlayerStats()
 		{
 			InitializeComponent();
+			this.DataContext = new DataContextBinding();
 		}
 	}
 }

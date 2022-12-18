@@ -25,3 +25,8 @@
 \\Mac\Home\Documents\RaceSim\RaceSim\WPF App\obj\ARM64\Debug\net6.0-windows\WPF_App.pdb
 \\Mac\Home\Documents\RaceSim\RaceSim\WPF App\obj\ARM64\Debug\net6.0-windows\WPF_App.genruntimeconfig.cache
 \\Mac\Home\Documents\RaceSim\RaceSim\WPF App\obj\ARM64\Debug\net6.0-windows\ref\WPF_App.dll
+\\Mac\Home\Documents\RaceSim\RaceSim\WPF App\obj\ARM64\Debug\net6.0-windows\PlayerStats.g.cs
+\\Mac\Home\Documents\RaceSim\RaceSim\WPF App\obj\ARM64\Debug\net6.0-windows\RaceStats.g.cs
+\\Mac\Home\Documents\RaceSim\RaceSim\WPF App\obj\ARM64\Debug\net6.0-windows\PlayerStats.baml
+\\Mac\Home\Documents\RaceSim\RaceSim\WPF App\obj\ARM64\Debug\net6.0-windows\RaceStats.baml
+\\Mac\Home\Documents\RaceSim\RaceSim\WPF App\obj\ARM64\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs

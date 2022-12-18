@@ -16,11 +16,19 @@ namespace WPF_App
     {
         private const string _straightTrack = "Z:\\Documents\\RaceSim\\RaceSim\\WPF App\\Assets\\Straight_Field.png";
         private const string _corner = "Z:\\Documents\\RaceSim\\RaceSim\\WPF App\\Assets\\corner_field.png";
+        private const string _finishTrack = "Z:\\Documents\\RaceSim\\RaceSim\\WPF App\\Assets\\Finish_field.png";
+        private const string _startTrack = "Z:\\Documents\\RaceSim\\RaceSim\\WPF App\\Assets\\starting_grid.png";
 
         private const string _anakin = "Z:\\Documents\\RaceSim\\RaceSim\\WPF App\\Assets\\Anakin Pod.png";
         private const string _anakinBroken = "Z:\\Documents\\RaceSim\\RaceSim\\WPF App\\Assets\\Anakin pod broken.png";
+		private const string _sebulba = "Z:\\Documents\\RaceSim\\RaceSim\\WPF App\\Assets\\Sebulba Pod.png";
+		private const string _sebulbaBroken = "Z:\\Documents\\RaceSim\\RaceSim\\WPF App\\Assets\\Sebulba pod broken.png";
+		private const string _nemesso = "Z:\\Documents\\RaceSim\\RaceSim\\WPF App\\Assets\\Nemesso pod.png";
+		private const string _nemessoBroken = "Z:\\Documents\\RaceSim\\RaceSim\\WPF App\\Assets\\Nemesso pod broken.png";
+		private const string _quadinaros = "Z:\\Documents\\RaceSim\\RaceSim\\WPF App\\Assets\\Quadinaros pod.png";
+		private const string _quadinarosBroken = "Z:\\Documents\\RaceSim\\RaceSim\\WPF App\\Assets\\Quadinaros pod broken.png";
 
-        private static int _imageSize = 320;
+		private static int _imageSize = 320;
 
         public static BitmapSource DrawTrack()
         {
@@ -35,7 +43,6 @@ namespace WPF_App
         {
             int[] lowestValxy = SetLowestVal(track);
             int[] totalxy = SetTotalVal(track);
-            Trace.WriteLine($"{totalxy[0]} + {totalxy[1]}");
             Bitmap map = ImageCreator.GetBitmap(_imageSize * totalxy[0], _imageSize * totalxy[1]);
 
             Graphics graphic = Graphics.FromImage(map);
@@ -45,10 +52,8 @@ namespace WPF_App
             {
                 int xdir = section.x + Math.Abs(lowestValxy[0]);
                 int ydir = section.y + Math.Abs(lowestValxy[1]);
-                //DrawableTrack = CurrentTrack(section.SectionType, compass);
                 DrawSections(section, xdir, ydir, graphic, compass);
                 compass = SetCompass(compass, section);
-                //Data.CurrentRace.stck.Push(section);
             }
 
             return ImageCreator.CreateBitmapSourceFromGdiBitmap(map);
@@ -153,46 +158,38 @@ namespace WPF_App
                 return map;
             }
 
-            if((section.SectionType != SectionTypes.LeftCorner && section.SectionType != SectionTypes.RightCorner) && (compass == 1 || compass == 3))
+            if((section.SectionType == SectionTypes.Straight) && (compass == 1 || compass == 3))
             {
                 map = new Bitmap(_straightTrack);
                 map.RotateFlip(RotateFlipType.Rotate90FlipNone);
                 return map;
-            } else if(section.SectionType != SectionTypes.LeftCorner && section.SectionType != SectionTypes.RightCorner)
+            } 
+            if((section.SectionType == SectionTypes.Finish) && (compass == 1 || compass == 3))
+            {
+                map = new Bitmap(_finishTrack);
+				map.RotateFlip(RotateFlipType.Rotate90FlipNone);
+				return map;
+			}
+			if((section.SectionType == SectionTypes.StartGrid) && (compass == 1 || compass == 3))
+			{
+				map = new Bitmap(_startTrack);
+				map.RotateFlip(RotateFlipType.Rotate90FlipNone);
+				return map;
+			} 
+            if(section.SectionType == SectionTypes.Straight)
             {
                 return new Bitmap(_straightTrack);
             }
+			if(section.SectionType == SectionTypes.Finish)
+			{
+				return new Bitmap(_finishTrack);
+			}
+			if(section.SectionType == SectionTypes.StartGrid)
+			{
+				return new Bitmap(_startTrack);
+			}
 
-            return new Bitmap(_corner);
-        }
-
-        private static Bitmap DrawUserOnMap(Bitmap map, SectionData section, IParticipant[] participants)
-        {
-            Graphics g = Graphics.FromImage(map);
-            g.CompositingMode = CompositingMode.SourceOver;
-            Image img = Image.FromFile(_anakin);
-            img.RotateFlip(RotateFlipType.RotateNoneFlipX);
-
-            //SectionData data = Data.CurrentRace.GetSectionData(section);
-            //if(section != null && section.Left != null)
-            //{
-            //    g.DrawImage(img, 2, 2, 250, 250);
-            //}
-            foreach(var participant in participants)
-            {
-                if (section == null) break;
-                //if()
-                if(section.Left != null && section.Left == participant)
-                {
-                    g.DrawImage(img, 2, 2, 250, 250);
-                } else if(section.Right != null && section.Right == participant)
-                {
-                    g.DrawImage(img, 2, 200, 250, 250);
-                }
-            }
-            g.Dispose();
-
-            return map;
+			return new Bitmap(_corner);
         }
 
         public static Bitmap DrawUser(Section section, Bitmap map, int compass)
@@ -209,41 +206,90 @@ namespace WPF_App
 
 			Image img = Image.FromFile(_anakin);
 
-
-            switch(compass)
-            {
-                case 0:
-					img.RotateFlip(RotateFlipType.RotateNoneFlipX);
-                    break;
-                case 1:
-                    img.RotateFlip(RotateFlipType.Rotate270FlipNone);
-                    break;
-                case 3:
-                    img.RotateFlip(RotateFlipType.Rotate90FlipNone);
-                    break;
-
-			}
 			foreach (var participant in participants)
 			{
-                if(participant.Equipment.IsBroken)
-                {
-                    img = Image.FromFile(_anakinBroken);
-                }
+                img = Image.FromFile(GetCurrentPlayerPath(participant));
+                img.RotateFlip(GetVisualPlayerRotation(compass));
 				if (sectionD == null) break;
-				
 				if (sectionD.Left != null && sectionD.Left == participant)
 				{
-					g.DrawImage(img, 2, 2, 250, 250);
+                    if ((section.SectionType == SectionTypes.Straight && compass == 1))
+                    {
+                        g.DrawImage(img, 200, 2, 250, 250);
+                    }
+                    else
+                    {
+                        g.DrawImage(img, 2, 2, 250, 250);
+                    }
 				}
 				else if (sectionD.Right != null && sectionD.Right == participant)
 				{
-					g.DrawImage(img, 2, 200, 250, 250);
+                    if ((section.SectionType == SectionTypes.RightCorner && compass == 2) || (section.SectionType == SectionTypes.Straight && compass == 3))
+                    {
+                        g.DrawImage(img, 200, 2, 250, 250);
+                    }
+                    else
+                    {
+                        g.DrawImage(img, 2, 200, 250, 250);
+                    }
 				}
 			}
 			g.Dispose();
 
 			return map;
-			//return DrawUserOnMap(map, d, participants);
         }
+
+        private static RotateFlipType GetVisualPlayerRotation(int compass)
+        {
+			switch (compass)
+			{
+				case 0:
+					return RotateFlipType.RotateNoneFlipX;
+				case 1:
+					return RotateFlipType.Rotate270FlipNone;
+				case 3:
+					return RotateFlipType.Rotate90FlipNone;
+                default:
+                    return RotateFlipType.RotateNoneFlipNone;
+			}
+		}
+
+        private static string GetCurrentPlayerPath(IParticipant participant)
+        {
+            if(participant.Name == "Anakin" && !participant.Equipment.IsBroken)
+            {
+                return _anakin;
+            }
+            else if(participant.Name == "Anakin" && participant.Equipment.IsBroken)
+            {
+                return _anakinBroken;
+            }
+			else if (participant.Name == "Sebulba" && !participant.Equipment.IsBroken)
+			{
+				return _sebulba;
+			}
+			else if (participant.Name == "Sebulba" && participant.Equipment.IsBroken)
+			{
+				return _sebulbaBroken;
+			}
+			else if (participant.Name == "Nemesso" && !participant.Equipment.IsBroken)
+			{
+				return _nemesso;
+			}
+			else if (participant.Name == "Nemesso" && participant.Equipment.IsBroken)
+			{
+				return _nemessoBroken;
+			}
+			else if (participant.Name == "Quadinaros" && !participant.Equipment.IsBroken)
+			{
+				return _quadinaros;
+			}
+			else if (participant.Name == "Quadinaros" && participant.Equipment.IsBroken)
+			{
+				return _quadinarosBroken;
+			}
+
+            return "";
+		}
     }
 }

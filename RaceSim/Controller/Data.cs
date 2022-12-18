@@ -31,26 +31,13 @@ namespace Controller
 
         private static void addTracks()
         {
-            SectionTypes[] types = { SectionTypes.Straight, SectionTypes.LeftCorner, SectionTypes.RightCorner, SectionTypes.StartGrid, SectionTypes.Finish };
-            SectionTypes[] raceTrack =
+            SectionTypes[] monG =
             {
-                SectionTypes.StartGrid, SectionTypes.StartGrid, SectionTypes.Finish, SectionTypes.RightCorner, SectionTypes.RightCorner,
-                SectionTypes.Straight, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.RightCorner, SectionTypes.RightCorner
+                SectionTypes.StartGrid, SectionTypes.StartGrid, SectionTypes.Finish, SectionTypes.Straight, SectionTypes.LeftCorner, SectionTypes.Straight,
+                SectionTypes.Straight, SectionTypes.LeftCorner, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.Straight,
+                SectionTypes.LeftCorner, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.LeftCorner, SectionTypes.Straight, SectionTypes.LeftCorner, SectionTypes.RightCorner
             };
-            SectionTypes[] raceTrack2 =
-            {
-                SectionTypes.Finish, SectionTypes.StartGrid, SectionTypes.Straight, SectionTypes.RightCorner,
-                SectionTypes.LeftCorner, SectionTypes.RightCorner, SectionTypes.RightCorner, SectionTypes.Straight, SectionTypes.Straight,
-                SectionTypes.Straight, SectionTypes.Straight, SectionTypes.RightCorner, SectionTypes.Straight,
-                SectionTypes.RightCorner
-            };
-            SectionTypes[] raceTrack3 =
-            {
-                SectionTypes.Finish, SectionTypes.StartGrid, SectionTypes.LeftCorner, SectionTypes.Straight,
-                SectionTypes.Straight, SectionTypes.LeftCorner, SectionTypes.Straight, SectionTypes.Straight,
-                SectionTypes.LeftCorner, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.LeftCorner
-            };
-            SectionTypes[] raceTrack4 =
+            SectionTypes[] aleen =
             {
                 SectionTypes.StartGrid, SectionTypes.StartGrid, SectionTypes.Finish, SectionTypes.RightCorner,
                 SectionTypes.Straight, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.RightCorner, SectionTypes.Straight,
@@ -58,9 +45,8 @@ namespace Controller
                 SectionTypes.RightCorner, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.RightCorner, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.LeftCorner,
                 SectionTypes.RightCorner, 
             };
-            Track t1 = new Track("Aleen", raceTrack4);
-            Track t2 = new Track("Mon Gazza", raceTrack);
-            Track t3 = new Track("Baroonda", types);
+            Track t1 = new Track("Aleen", aleen);
+            Track t2 = new Track("Mon Gazza", monG);
             Competition.Tracks.Enqueue(t1);
             Competition.Tracks.Enqueue(t2);
         }
@@ -71,22 +57,9 @@ namespace Controller
             if(CurrentTrack != null)
             {
                 CurrentRace = new Race(CurrentTrack, Competition.Participants);
-                CurrentRace.NextRaceStart += OnRaceDone;
             }
 
             return CurrentTrack;
-        }
-
-        public static void OnRaceDone(object sender, EventArgs e)
-        {
-            if (!CurrentRace.RaceDone) return;
-            
-            CurrentRace = new Race(Competition.NextTrack(), Competition.Participants);
-            foreach (var participant in Competition.Participants)
-            {
-                participant.Rounds = 0;
-            }
-            CurrentRace.Start();
         }
     }
 }

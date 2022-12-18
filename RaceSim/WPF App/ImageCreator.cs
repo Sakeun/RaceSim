@@ -49,6 +49,11 @@ namespace WPF_App
             return _bitmapDic["emptyMap"];
         }
 
+        public static void ClearCache()
+        {
+            _bitmapDic.Clear();
+        }
+
         public static BitmapSource CreateBitmapSourceFromGdiBitmap(Bitmap bitmap)
         {
             if (bitmap == null)

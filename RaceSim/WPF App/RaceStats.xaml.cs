@@ -22,6 +22,7 @@ namespace WPF_App
 		public RaceStats()
 		{
 			InitializeComponent();
+			this.DataContext = new DataContextBinding();
 		}
 	}
 }

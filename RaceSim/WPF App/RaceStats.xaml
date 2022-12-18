@@ -5,8 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_App"
         mc:Ignorable="d"
-        Title="RaceStats" Height="450" Width="800">
+        Title="RaceStats" Height="450" Width="800" Background="#FF83BA63">
+    <Window.DataContext>
+        <local:DataContextBinding/>
+    </Window.DataContext>
     <Grid>
-        
+        <ListView ItemsSource="{Binding PlayerTotalPoints}" Margin="0,0,400,0" Background="{x:Null}">
+        </ListView>
+        <Label Content="Upcoming track:" HorizontalAlignment="Left" Margin="554,102,0,0" VerticalAlignment="Top"/>
+        <Label Content="{Binding UpcomingTrack}" HorizontalAlignment="Left" Margin="587,133,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>
