@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 \\Mac\Home\Documents\RaceSim\RaceSim\WPF App\App.xaml
-11407045341
+3-1733423359
 11775607050
-72005072030
+10-87251643
 1971444212485
-MainWindow.xaml;
+MainWindow.xaml;PlayerStats.xaml;RaceStats.xaml;
 
 True
 

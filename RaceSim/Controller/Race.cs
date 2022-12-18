@@ -16,7 +16,7 @@ namespace Controller
         private Random _random { get; set; }
         private Dictionary<Section, SectionData> _positions { get; set; }
 
-        private Timer _timer { get; set; } = new(1000);
+        private Timer _timer { get; set; } = new(500);
 
         private Dictionary<IParticipant, Stack<Section>> _playerStack { get; set; } = new ();
         
@@ -120,6 +120,10 @@ namespace Controller
             }
 
             _positions.Add(nextSection, new SectionData(participant, distance - _totalTrackDistance, isRight));
+            if(nextSection.SectionType == SectionTypes.Finish)
+            {
+                participant.Rounds++;
+            }
             return nextSection;
             
         }
@@ -163,11 +167,7 @@ namespace Controller
                 {
                     continue;
                 }
-                if(current.SectionType == SectionTypes.Finish)
-                {
-					participant.Rounds++;
-				}
-				if (participant.Rounds >= 2 && current.SectionType == SectionTypes.Finish)
+				if (current.SectionType == SectionTypes.Finish && participant.Rounds >= 3)
                 {
                     if (_positions.ContainsKey(current) && (_positions[current].Left == participant ||
                                                             _positions[current].Right == participant))
