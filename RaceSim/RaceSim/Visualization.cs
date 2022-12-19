@@ -135,15 +135,34 @@ public static class Visualization
 
         if (Data.CurrentRace.RaceDone)
         {
-            Data.CurrentRace.MovePlayer(e.Users);
-            DrawTrack(Data.CurrentRace.Track, e.Users);
+        //    Data.CurrentRace.MovePlayer(e.Users);
+        //    DrawTrack(Data.CurrentRace.Track, e.Users);
             Console.Clear();
             Data.CurrentRace.DriversChanged -= OnDriversChanged;
-            Data.CurrentRace.DriversChanged += OnDriversChanged;
+            Data.CurrentRace.NextRaceStart -= OnRaceDone;
+			if (Data.Competition.Tracks.Count != 0)
+			{
+				Data.CurrentRace.NextRaceStart += OnRaceDone;
+				Data.CurrentRace.DriversChanged += OnDriversChanged;
+				e.Track = Data.CurrentRace.Track;
+			}
         }
     }
 
-    private static int SetCompass(int dir, Section sec)
+	public static void OnRaceDone(object? sender, EventArgs e)
+	{
+		if (!Data.CurrentRace.RaceDone) return;
+
+		Data.CurrentRace.Track = Data.NextRace();
+		foreach (var participant in Data.Competition.Participants)
+		{
+			participant.Rounds = 0;
+			participant.RoundsDone = false;
+		}
+		Data.CurrentRace.Start();
+	}
+
+	private static int SetCompass(int dir, Section sec)
     {
         if (sec.SectionType == SectionTypes.RightCorner)
         {

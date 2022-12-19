@@ -9,6 +9,7 @@ namespace Model
         TeamColors TeamColors { get; set; }
         int Rounds { get; set; }
         int TimesBroken { get; set; }
+        bool RoundsDone { get; set; }
     }
 
 

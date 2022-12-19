@@ -9,12 +9,14 @@ namespace Controller
     public class Race_Tests
     {
         private Race _raceTest;
+
         [SetUp]
         public void SetUp()
         {
             Competition comp = new Competition();
             Data.Initialize(comp);
-            _raceTest = new Race(Data.CurrentRace.Track, Data.CurrentRace.Participants);
+			Data.NextRace();
+			_raceTest = new Race(Data.CurrentRace.Track, Data.CurrentRace.Participants);
         }
 
         [Test]
@@ -31,9 +33,18 @@ namespace Controller
             Section current = Data.CurrentRace.Track.Sections.ElementAt(0);
             Section next = Data.CurrentRace.Track.Sections.ElementAt(1);
 
-            Section result = Data.CurrentRace.MovePlayerNextSection(current, next, Data.CurrentRace.Participants[0], 1200, false);
+            Section result = Data.CurrentRace.MovePlayerNextSection(current, next, Data.CurrentRace.Participants[0], 1000, false);
 
-            Assert.AreEqual(next, result);
+            Assert.That(result.SectionType, Is.EqualTo(next.SectionType));
+        }
+
+        [Test]
+        public void CreateStack_ReturnAllSections()
+        {
+            int expected = Data.CurrentRace.Track.Sections.Count;
+            Stack<Section> result = Data.CurrentRace.CreateStack();
+
+            Assert.That(expected, Is.EqualTo(result.Count));
         }
 
     }

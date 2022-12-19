@@ -17,6 +17,7 @@
         public int Rounds { get; set; }
 
         public int TimesBroken { get; set; }
+        public bool RoundsDone { get; set; }
 
         public Driver(string name, TeamColors teamcolors, IEquipment equipment)
         {

@@ -80,6 +80,7 @@ namespace WPF_App
 		    foreach (var participant in Data.Competition.Participants)
 		    {
 		        participant.Rounds = 0;
+                participant.RoundsDone = false;
 		    }
             Data.CurrentRace.Start();
         }

@@ -17,11 +17,13 @@ namespace Controller
         private Dictionary<Section, SectionData> _positions { get; set; }
 
         private Timer _timer { get; set; } = new(500);
+        //private Timer _timer { get; set; } = new(1000);
 
         private Dictionary<IParticipant, Stack<Section>> _playerStack { get; set; } = new ();
         
         public bool RaceDone { get; set; }
 
+        //private int _totalTrackDistance = 100;
         private int _totalTrackDistance = 1000;
 
         public string FirstPlace;
@@ -102,11 +104,15 @@ namespace Controller
         public Section MovePlayerNextSection(Section currentSection, Section nextSection, IParticipant participant,
             int distance, bool isRight)
         {
-            if (NextTrackContainsPlayer(nextSection, isRight)) 
+
+			if (NextTrackContainsPlayer(nextSection, isRight)) 
                 return currentSection;
-            
-            RemovePlayerFromSection(currentSection, participant);
-            if (_positions.ContainsKey(nextSection) && isRight)
+			if (nextSection.SectionType == SectionTypes.Finish)
+			{
+				participant.Rounds++;
+			}
+			RemovePlayerFromSection(currentSection, participant);
+			if (_positions.ContainsKey(nextSection) && isRight)
             {
                 _positions[nextSection].Right = participant;
                 _positions[nextSection].DistanceRight = distance - _totalTrackDistance;
@@ -120,10 +126,6 @@ namespace Controller
             }
 
             _positions.Add(nextSection, new SectionData(participant, distance - _totalTrackDistance, isRight));
-            if(nextSection.SectionType == SectionTypes.Finish)
-            {
-                participant.Rounds++;
-            }
             return nextSection;
             
         }
@@ -153,10 +155,13 @@ namespace Controller
                 {
                     continue;
                 }
+                if(participant.RoundsDone)
+                {
+                    continue;
+                }
 				Section current = _playerStack[participant].Peek();
                 //Section active = _playerStack[participant].First.Value;
                 _playerStack[participant].Pop();
-                Trace.WriteLine(current.SectionType);
                 Section next;
                 int distance = 0;
                 bool isRight = false;
@@ -167,7 +172,7 @@ namespace Controller
                 {
                     continue;
                 }
-				if (current.SectionType == SectionTypes.Finish && participant.Rounds >= 3)
+				if (participant.Rounds >= 3 && current.SectionType == SectionTypes.Finish)
                 {
                     if (_positions.ContainsKey(current) && (_positions[current].Left == participant ||
                                                             _positions[current].Right == participant))
@@ -176,12 +181,13 @@ namespace Controller
                     }
 
                     var totalRounds = participants.Where(i => i.Name != participant.Name).Select(i => i.Rounds).ToList();
-                    if(!totalRounds.Contains(4) && participant.Points == 0)
+                    if(!totalRounds.Contains(3) && participant.Points == 0)
                     {
                         participant.Points++;
                     }
                     CheckRaceDone(participants);
                     _playerStack[participant].Push(current);
+                    participant.RoundsDone = true;
                     continue;
                 }
                 
@@ -237,7 +243,7 @@ namespace Controller
             }
         }
 
-        private Stack<Section> CreateStack()
+        public Stack<Section> CreateStack()
         {
             Stack<Section> temp1 = new Stack<Section>();
             if (Track == null) return temp1;
@@ -280,6 +286,7 @@ namespace Controller
 
         private bool NextTrackContainsPlayer(Section next, bool isRight)
         {
+            if(next == null) return false;
             if (_positions.ContainsKey(next))
             {
                 if (isRight)
@@ -299,7 +306,7 @@ namespace Controller
 
             foreach (IParticipant p in players)
             {
-                if(p.Rounds >= 2)
+                if(p.Rounds >= 3)
                 {
                     check++;
                 }
@@ -352,14 +359,6 @@ namespace Controller
             }
 
             return highestParticipant;
-        }
-
-        private void CheckNextSectionFinish(Section section, IParticipant participant)
-        {
-            if(section.SectionType == SectionTypes.Finish)
-            {
-                participant.Rounds++;
-            }
         }
     }
     
