@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "lW6H5/JOYszVkK3eJtHHECsRjeszgi5SpWXCtGxKNE1AgjWNE0jidcY3IjbXnimvmjkLb8IJd/85HWkuu8aTIA==",
+  "dgSpecHash": "bvg3vwGXRm5b8j95sdsCYoMEwfpbPmciJyUkQHAKWgcWvLBEvXPySjajK3B6fhjlnGwDsfMDvMTyYKqA+ZZROQ==",
   "success": true,
-  "projectFilePath": "\\\\Mac\\Home\\Documents\\RaceSim\\RaceSim\\Controller\\Controller.csproj",
+  "projectFilePath": "\\\\Mac\\Home\\Documents\\GitHub\\RaceSim\\RaceSim\\Controller\\Controller.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\sietsezee\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
     "C:\\Users\\sietsezee\\.nuget\\packages\\system.drawing.common\\6.0.0\\system.drawing.common.6.0.0.nupkg.sha512"

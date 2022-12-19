@@ -190,11 +190,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "\\\\Mac\\Home\\Documents\\RaceSim\\RaceSim\\RaceSim\\RaceSim.csproj",
+      "projectUniqueName": "\\\\Mac\\Home\\Documents\\GitHub\\RaceSim\\RaceSim\\RaceSim\\RaceSim.csproj",
       "projectName": "RaceSim",
-      "projectPath": "\\\\Mac\\Home\\Documents\\RaceSim\\RaceSim\\RaceSim\\RaceSim.csproj",
+      "projectPath": "\\\\Mac\\Home\\Documents\\GitHub\\RaceSim\\RaceSim\\RaceSim\\RaceSim.csproj",
       "packagesPath": "C:\\Users\\sietsezee\\.nuget\\packages\\",
-      "outputPath": "\\\\Mac\\Home\\Documents\\RaceSim\\RaceSim\\RaceSim\\obj\\",
+      "outputPath": "\\\\Mac\\Home\\Documents\\GitHub\\RaceSim\\RaceSim\\RaceSim\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\sietsezee\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -211,14 +211,14 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "\\\\Mac\\Home\\Documents\\RaceSim\\RaceSim\\Controller\\Controller.csproj": {
-              "projectPath": "\\\\Mac\\Home\\Documents\\RaceSim\\RaceSim\\Controller\\Controller.csproj"
+            "\\\\Mac\\Home\\Documents\\GitHub\\RaceSim\\RaceSim\\Controller\\Controller.csproj": {
+              "projectPath": "\\\\Mac\\Home\\Documents\\GitHub\\RaceSim\\RaceSim\\Controller\\Controller.csproj"
             },
-            "\\\\Mac\\Home\\Documents\\RaceSim\\RaceSim\\Model\\Model.csproj": {
-              "projectPath": "\\\\Mac\\Home\\Documents\\RaceSim\\RaceSim\\Model\\Model.csproj"
+            "\\\\Mac\\Home\\Documents\\GitHub\\RaceSim\\RaceSim\\Model\\Model.csproj": {
+              "projectPath": "\\\\Mac\\Home\\Documents\\GitHub\\RaceSim\\RaceSim\\Model\\Model.csproj"
             },
-            "\\\\Mac\\Home\\Documents\\RaceSim\\RaceSim\\WPF App\\WPF_App.csproj": {
-              "projectPath": "\\\\Mac\\Home\\Documents\\RaceSim\\RaceSim\\WPF App\\WPF_App.csproj"
+            "\\\\Mac\\Home\\Documents\\GitHub\\RaceSim\\RaceSim\\WPF App\\WPF_App.csproj": {
+              "projectPath": "\\\\Mac\\Home\\Documents\\GitHub\\RaceSim\\RaceSim\\WPF App\\WPF_App.csproj"
             }
           }
         }

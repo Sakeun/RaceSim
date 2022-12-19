@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-\\Mac\Home\Documents\RaceSim\RaceSim\WPF App\obj\ARM64\Debug\net6.0-windows\
+\\Mac\Home\Documents\GitHub\RaceSim\RaceSim\WPF App\obj\ARM64\Debug\net6.0-windows\
 WPF_App
 none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
-\\Mac\Home\Documents\RaceSim\RaceSim\WPF App\App.xaml
+\\Mac\Home\Documents\GitHub\RaceSim\RaceSim\WPF App\App.xaml
 3-1733423359
 11775607050
 10-156630045
-1971444212485
+1971054005095
 MainWindow.xaml;PlayerStats.xaml;RaceStats.xaml;
 
 True

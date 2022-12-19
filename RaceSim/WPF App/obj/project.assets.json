@@ -175,11 +175,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "\\\\Mac\\Home\\Documents\\RaceSim\\RaceSim\\WPF App\\WPF_App.csproj",
+      "projectUniqueName": "\\\\Mac\\Home\\Documents\\GitHub\\RaceSim\\RaceSim\\WPF App\\WPF_App.csproj",
       "projectName": "WPF_App",
-      "projectPath": "\\\\Mac\\Home\\Documents\\RaceSim\\RaceSim\\WPF App\\WPF_App.csproj",
+      "projectPath": "\\\\Mac\\Home\\Documents\\GitHub\\RaceSim\\RaceSim\\WPF App\\WPF_App.csproj",
       "packagesPath": "C:\\Users\\sietsezee\\.nuget\\packages\\",
-      "outputPath": "\\\\Mac\\Home\\Documents\\RaceSim\\RaceSim\\WPF App\\obj\\",
+      "outputPath": "\\\\Mac\\Home\\Documents\\GitHub\\RaceSim\\RaceSim\\WPF App\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\sietsezee\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -196,11 +196,11 @@
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
           "projectReferences": {
-            "\\\\Mac\\Home\\Documents\\RaceSim\\RaceSim\\Controller\\Controller.csproj": {
-              "projectPath": "\\\\Mac\\Home\\Documents\\RaceSim\\RaceSim\\Controller\\Controller.csproj"
+            "\\\\Mac\\Home\\Documents\\GitHub\\RaceSim\\RaceSim\\Controller\\Controller.csproj": {
+              "projectPath": "\\\\Mac\\Home\\Documents\\GitHub\\RaceSim\\RaceSim\\Controller\\Controller.csproj"
             },
-            "\\\\Mac\\Home\\Documents\\RaceSim\\RaceSim\\Model\\Model.csproj": {
-              "projectPath": "\\\\Mac\\Home\\Documents\\RaceSim\\RaceSim\\Model\\Model.csproj"
+            "\\\\Mac\\Home\\Documents\\GitHub\\RaceSim\\RaceSim\\Model\\Model.csproj": {
+              "projectPath": "\\\\Mac\\Home\\Documents\\GitHub\\RaceSim\\RaceSim\\Model\\Model.csproj"
             }
           }
         }

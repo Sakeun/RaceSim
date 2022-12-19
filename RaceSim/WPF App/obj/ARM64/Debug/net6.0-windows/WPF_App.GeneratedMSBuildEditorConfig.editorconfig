@@ -8,4 +8,4 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = WPF_App
-build_property.ProjectDir = \\Mac\Home\Documents\RaceSim\RaceSim\WPF App\
+build_property.ProjectDir = \\Mac\Home\Documents\GitHub\RaceSim\RaceSim\WPF App\

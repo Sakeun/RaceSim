@@ -155,11 +155,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "\\\\Mac\\Home\\Documents\\RaceSim\\RaceSim\\Controller\\Controller.csproj",
+      "projectUniqueName": "\\\\Mac\\Home\\Documents\\GitHub\\RaceSim\\RaceSim\\Controller\\Controller.csproj",
       "projectName": "Controller",
-      "projectPath": "\\\\Mac\\Home\\Documents\\RaceSim\\RaceSim\\Controller\\Controller.csproj",
+      "projectPath": "\\\\Mac\\Home\\Documents\\GitHub\\RaceSim\\RaceSim\\Controller\\Controller.csproj",
       "packagesPath": "C:\\Users\\sietsezee\\.nuget\\packages\\",
-      "outputPath": "\\\\Mac\\Home\\Documents\\RaceSim\\RaceSim\\Controller\\obj\\",
+      "outputPath": "\\\\Mac\\Home\\Documents\\GitHub\\RaceSim\\RaceSim\\Controller\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\sietsezee\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -176,8 +176,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "\\\\Mac\\Home\\Documents\\RaceSim\\RaceSim\\Model\\Model.csproj": {
-              "projectPath": "\\\\Mac\\Home\\Documents\\RaceSim\\RaceSim\\Model\\Model.csproj"
+            "\\\\Mac\\Home\\Documents\\GitHub\\RaceSim\\RaceSim\\Model\\Model.csproj": {
+              "projectPath": "\\\\Mac\\Home\\Documents\\GitHub\\RaceSim\\RaceSim\\Model\\Model.csproj"
             }
           }
         }
