@@ -32,6 +32,6 @@ namespace WPF_App
 		public void DriverPropertyChanged(object sender, DriversChangedEventArgs e)
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(""));
-	}
+		}
 	}
 }
